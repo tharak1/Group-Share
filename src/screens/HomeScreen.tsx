@@ -59,6 +59,7 @@ const HomeScreen:React.FC = () => {
     const socket = useMemo(
         () =>
           io(serverString, {
+            transports: ['websocket', 'polling'],
           }),
         []
       );
