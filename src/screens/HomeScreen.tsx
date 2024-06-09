@@ -79,7 +79,7 @@ const HomeScreen:React.FC = () => {
     return (
         <div className={theme}>
             <div className='lg:grid grid-cols-1 w-full h-screen max-lg:h-fit lg:grid-rows-8 bg-slate-300 dark:bg-slate-700'>
-                <div className={`${isDrawerOpen?"max-lg:hidden":""} col-span-1 lg:row-span-1  w-full`}>
+                <div className={` col-span-1 lg:row-span-1  w-full`}>
                     <Navbar user={user} />
                 </div>
 

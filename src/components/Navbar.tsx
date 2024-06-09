@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Theme, toggleTheme } from '../redux/ThemeSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { UserModel } from '../models/AllModel';
 import { removeUser } from '../redux/UserSlice';
+import { toggleDrawer } from '../redux/DrawerSlice';
 interface NavbarProps{
     user:UserModel;
 }
@@ -32,6 +33,10 @@ const Navbar:React.FC<NavbarProps> = ({user}) => {
         dispatch(toggleTheme());
     };
 
+    const handleToggle = () => {
+        dispatch(toggleDrawer());
+      };
+    
     const handleLogout = () =>{
         dispatch(removeUser());
         localStorage.clear();
@@ -40,10 +45,10 @@ const Navbar:React.FC<NavbarProps> = ({user}) => {
   return (
     <div className="w-full flex flex-row justify-between items-center bg-gray-100 dark:bg-slate-600 shadow-md p-3">
         <div>
-            <Link to="#" className="flex items-center text-2xl font-semibold text-gray-900 dark:text-white">
+            <div className="flex items-center text-2xl font-semibold text-gray-900 dark:text-white hover:cursor-pointer " onClick={handleToggle}>
                 <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo"/>
                 Flowbite    
-            </Link>
+            </div>
             <p className='dark:text-white'>
                 {formatDate(new Date())}
             </p>
