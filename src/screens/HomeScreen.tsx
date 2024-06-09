@@ -59,8 +59,6 @@ const HomeScreen:React.FC = () => {
     const socket = useMemo(
         () =>
           io(serverString, {
-            cert: process.env.SSL_CERT,
-            key: process.env.SSL_KEY,
             path: '/socket',
             reconnection: true,
             transports: ['websocket', 'polling'],
