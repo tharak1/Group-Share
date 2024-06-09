@@ -11,6 +11,7 @@ import JoinGroupModal from '../components/JoinGroupModal';
 import { RootState, useAppDispatch } from '../redux/PersistanceStorage';
 import { io } from "socket.io-client";
 import { toggleDrawer } from '../redux/DrawerSlice';
+import { serverString } from '../models/ServerString';
 
 const HomeScreen:React.FC = () => {
     const dispatch = useAppDispatch();
@@ -57,7 +58,7 @@ const HomeScreen:React.FC = () => {
 
     const socket = useMemo(
         () =>
-          io("http://localhost:3000", {
+          io(serverString, {
           }),
         []
       );

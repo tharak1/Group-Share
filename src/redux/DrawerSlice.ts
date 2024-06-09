@@ -5,7 +5,7 @@ interface DrawerState {
 }
 
 const initialState: DrawerState = {
-  isOpen: true,
+  isOpen: false,
 };
 
 const drawerSlice = createSlice({
