@@ -43,7 +43,7 @@ const LoginScreen:React.FC = () => {
       });
       if (response.status === 200) {
         dispatch(addUser(response.data as UserModel));
-        navigate("/home");
+        navigate('/home', { replace: true });
       } else {
       }
     } catch (error) {
