@@ -62,7 +62,7 @@ const Navbar:React.FC<NavbarProps> = ({user}) => {
                 <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo"/>
                 AutoDS    
             </div>
-            <p className="text-sm">Automation data delivery system</p>
+            <p className="text-sm dark:text-white">Automation data delivery system</p>
             <p className='dark:text-white'>
                 {formatDate(new Date())}
             </p>

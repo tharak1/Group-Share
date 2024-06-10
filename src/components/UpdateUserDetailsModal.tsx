@@ -34,13 +34,14 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({ isOpen, onClose }) =>
         setUserData(user);
         setP1(user.password);
         setP2(user.password);
+        setError('')
     }, [user]);
 
     const handleCreateUser = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (p1 === p2) {
             setLoading(true);
-            const Url = `${serverString}/api/user/updateUserDetails?id=${userData._id}`
+            const Url = `${serverString}/api/user/updateUserDetails?id=${user._id}`
             try {
                 const response = await axios.post(Url, { ...userData, password: p1 });
                 if (response.status === 200) {
