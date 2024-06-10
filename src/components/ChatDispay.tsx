@@ -64,6 +64,7 @@ const ChatDispay:React.FC<ChatDispayProps> = ({user,groupId,socket}) => {
     const addGroupClose = () => {
         setAddGroupOpen(false);
         getGroupData();
+        socket.emit("message", { message:fileData.otherData, room: groupId });
     }
 
     const handleCreateTimeGroup = () => {
