@@ -12,6 +12,7 @@ import { RootState, useAppDispatch } from '../redux/PersistanceStorage';
 import { io } from "socket.io-client";
 import { toggleDrawer } from '../redux/DrawerSlice';
 import { serverString } from '../models/ServerString';
+import AddAdminMOdal from '../components/AddAdminMOdal';
 
 const HomeScreen:React.FC = () => {
     const dispatch = useAppDispatch();
@@ -20,7 +21,7 @@ const HomeScreen:React.FC = () => {
     const [selectedGroupIndex, setSelectedGroupIndex] = useState<number | null>(null);
     const [isAddGroupOpen, setAddGroupOpen] = useState<boolean>(false);
     const [isOpen, setIsopen] = useState<boolean>(false);
-
+    const [isAddAdminOpen, setAddAdminOpen] = useState<boolean>(false);
     const [filteredGroups, setFilteredGroups] = useState<joinedGroupsModel[]>(user.joinedGroups || []);
     const [searchInput, setSearchInput] = useState<string>('');
 
@@ -42,6 +43,14 @@ const HomeScreen:React.FC = () => {
 
     const addGroupClose = () => {
         setAddGroupOpen(false);
+    }
+
+    const handleCreateNewAdmin = () => {
+        setAddAdminOpen(true);
+    }
+
+    const addAdminClose = () => {
+        setAddAdminOpen(false);
     }
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,6 +123,12 @@ const HomeScreen:React.FC = () => {
                                         </div>
                                         <h2 className='ml-2 dark:text-white'>Create new Group</h2>
                                     </div>
+                                    <div className='w-full rounded-md bg-slate-200 dark:bg-slate-700 flex flex-row items-center p-2 my-2 hover:cursor-pointer' onClick={handleCreateNewAdmin} >
+                                        <div className='h-10 w-10 rounded-full bg-blue-300 flex justify-center items-center '>
+                                            <IoMdAdd />
+                                        </div>
+                                        <h2 className='ml-2 dark:text-white'>Create new Admin</h2>
+                                    </div>
                                 </>
                             ) : (
                                 <>
@@ -154,6 +169,7 @@ const HomeScreen:React.FC = () => {
             </div>
             <CreateGroupModal isOpen={isAddGroupOpen} onClose={addGroupClose} />
             <JoinGroupModal isOpen={isOpen} onClose={funColose} />
+            <AddAdminMOdal isOpen={isAddAdminOpen} onClose={addAdminClose} />
         </div>
     )
 }
