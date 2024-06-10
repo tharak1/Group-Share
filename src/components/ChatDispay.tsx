@@ -247,7 +247,6 @@ const ChatDispay:React.FC<ChatDispayProps> = ({user,groupId,socket}) => {
                         </div>
                     ):(        
                 <>
-
 <div
             ref={contentRef}
             className={`row-start-2 ${
