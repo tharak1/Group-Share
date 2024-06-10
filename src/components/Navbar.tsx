@@ -60,8 +60,9 @@ const Navbar:React.FC<NavbarProps> = ({user}) => {
         <div>
             <div className="flex items-center text-2xl font-semibold text-gray-900 dark:text-white hover:cursor-pointer " onClick={handleToggle}>
                 <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo"/>
-                Flowbite    
+                AutoDS    
             </div>
+            <p className="text-sm">Automation data delivery system</p>
             <p className='dark:text-white'>
                 {formatDate(new Date())}
             </p>

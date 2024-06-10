@@ -115,7 +115,9 @@ const ChatDispay:React.FC<ChatDispayProps> = ({user,groupId,socket}) => {
         const response = await axios.get(url);
         if (response.status === 200) {
             dispatch(fetchUserData());
+            getGroupData();
         }
+
     }
 
     const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
