@@ -109,6 +109,15 @@ const ChatDispay:React.FC<ChatDispayProps> = ({user,groupId,socket}) => {
         }
     }
 
+
+    const removeFromGroup = async (id:string) => {
+        const url = `${serverString}/api/user/leaveGroup?userId=${id}&groupId=${groupId}`;
+        const response = await axios.get(url);
+        if (response.status === 200) {
+            dispatch(fetchUserData());
+        }
+    }
+
     const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -187,7 +196,7 @@ const ChatDispay:React.FC<ChatDispayProps> = ({user,groupId,socket}) => {
 
                     <div className='relative flex items-center justify-center h-10 w-10 rounded-full mr-3 hover:cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-500' onClick={()=>{setShowDropDown(!showDropdown)}}>
                         <CiMenuKebab size={20}/>
-                        <div id="dropdown" className={`absolute z-10 lg:bottom-[-65px] max-lg:bottom-[-110px]  lg:right-[-20px] max-lg:right-[-6px] ${showDropdown?"":"hidden"} bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}>
+                        <div id="dropdown" className={`absolute z-10 lg:bottom-[-100px] max-lg:bottom-[-110px]  lg:right-[-20px] max-lg:right-[-6px] ${showDropdown?"":"hidden"} bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}>
                             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                                 {
                                     user.isAdmin?(
@@ -218,9 +227,19 @@ const ChatDispay:React.FC<ChatDispayProps> = ({user,groupId,socket}) => {
                                 groupData?.groupMembers.map((obj)=>(
                                     <div className='w-full border-b-2 flex flex-row justify-between items-center p-5 dark:text-white'>
                                     
+                                        <div>
                                             <h2>Name : {obj.name}</h2>
                                             <h2>Ph.No : {obj.phoneNo}</h2>
                                             <h2>email : {obj.email}</h2>
+                                        </div>
+
+                                        {
+                                            user.isAdmin &&(
+                                                <div>
+                                                <button className='py-1 px-4 bg-red-500 rounded-md ' onClick={()=>{removeFromGroup(obj.userID)}} >Delete</button>
+                                            </div>
+                                            )
+                                        }
                                         
                                     </div>
                                 ))

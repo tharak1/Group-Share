@@ -13,6 +13,8 @@ import { io } from "socket.io-client";
 import { toggleDrawer } from '../redux/DrawerSlice';
 import { serverString } from '../models/ServerString';
 import AddAdminMOdal from '../components/AddAdminMOdal';
+import { MdDelete } from "react-icons/md";
+import DeleteAdminModal from '../components/DeleteAdmin';
 
 const HomeScreen:React.FC = () => {
     const dispatch = useAppDispatch();
@@ -24,10 +26,15 @@ const HomeScreen:React.FC = () => {
     const [isAddAdminOpen, setAddAdminOpen] = useState<boolean>(false);
     const [filteredGroups, setFilteredGroups] = useState<joinedGroupsModel[]>(user.joinedGroups || []);
     const [searchInput, setSearchInput] = useState<string>('');
+    const [isDeleteAdminOpen, setDeleteAdminOpen] = useState<boolean>(false);
 
     useEffect(() => {
         setFilteredGroups(user.joinedGroups || []);
     }, [user.joinedGroups]);
+
+    useEffect(()=>{
+        dispatch(fetchUserData());
+    },[])
 
     const funOpen = () => {
         setIsopen(true);
@@ -51,6 +58,15 @@ const HomeScreen:React.FC = () => {
 
     const addAdminClose = () => {
         setAddAdminOpen(false);
+    }
+
+    
+    const handleDeleteAdmin = () => {
+        setDeleteAdminOpen(true);
+    }
+
+    const deleteAdminClose = () => {
+        setDeleteAdminOpen(false);
     }
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -129,6 +145,12 @@ const HomeScreen:React.FC = () => {
                                         </div>
                                         <h2 className='ml-2 dark:text-white'>Create new Admin</h2>
                                     </div>
+                                    <div className='w-full rounded-md bg-slate-200 dark:bg-slate-700 flex flex-row items-center p-2 my-2 hover:cursor-pointer' onClick={handleDeleteAdmin} >
+                                        <div className='h-10 w-10 rounded-full bg-blue-300 flex justify-center items-center '>
+                                            <MdDelete />
+                                        </div>
+                                        <h2 className='ml-2 dark:text-white'>Delete Admins</h2>
+                                    </div>
                                 </>
                             ) : (
                                 <>
@@ -170,6 +192,7 @@ const HomeScreen:React.FC = () => {
             <CreateGroupModal isOpen={isAddGroupOpen} onClose={addGroupClose} />
             <JoinGroupModal isOpen={isOpen} onClose={funColose} />
             <AddAdminMOdal isOpen={isAddAdminOpen} onClose={addAdminClose} />
+            <DeleteAdminModal isOpen={isDeleteAdminOpen} onClose={deleteAdminClose}/>
         </div>
     )
 }

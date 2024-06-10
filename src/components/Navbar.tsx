@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserModel } from '../models/AllModel';
 import { removeUser } from '../redux/UserSlice';
 import { toggleDrawer } from '../redux/DrawerSlice';
+import UpdateUserModal from './UpdateUserDetailsModal';
 interface NavbarProps{
     user:UserModel;
 }
@@ -42,8 +43,20 @@ const Navbar:React.FC<NavbarProps> = ({user}) => {
         localStorage.clear();
         navigate('/')
     }
+
+    const [isDeleteAdminOpen, setDeleteAdminOpen] = useState<boolean>(false);
+
+    const handleCreateNewAdmin = () => {
+        setDeleteAdminOpen(true);
+    }
+
+    const addAdminClose = () => {
+        setDeleteAdminOpen(false);
+    }
+
   return (
-    <div className="w-full flex flex-row justify-between items-center bg-gray-100 dark:bg-slate-600 shadow-md p-3">
+<>
+<div className="w-full flex flex-row justify-between items-center bg-gray-100 dark:bg-slate-600 shadow-md p-3">
         <div>
             <div className="flex items-center text-2xl font-semibold text-gray-900 dark:text-white hover:cursor-pointer " onClick={handleToggle}>
                 <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo"/>
@@ -81,6 +94,8 @@ const Navbar:React.FC<NavbarProps> = ({user}) => {
 
                                 )
                             }
+                            <button className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-blue-400 rounded-lg border border-gray-200 hover:bg-red-600 hover:text-black-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-blue-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-red-700" onClick={handleCreateNewAdmin}>Edit</button>
+                            
                             <button className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-red-400 rounded-lg border border-gray-200 hover:bg-red-600 hover:text-black-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-red-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-red-700" onClick={handleLogout}>LogOut</button>
                         </div>
                     </div>
@@ -88,6 +103,8 @@ const Navbar:React.FC<NavbarProps> = ({user}) => {
             </div>
         </div>
     </div>
+    <UpdateUserModal isOpen={isDeleteAdminOpen} onClose={addAdminClose}/>
+</>
   )
 }
 
