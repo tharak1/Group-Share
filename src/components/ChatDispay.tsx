@@ -268,7 +268,7 @@ const ChatDispay:React.FC<ChatDispayProps> = ({user,groupId,socket}) => {
                   ))}
         </div>
 
-                {user.isAdmin &&(        
+                       
                     <div className='row-start-10 row-span-1 h-full max-lg:row-start-12 col-span-2 '>
                         <form onSubmit={handleSubmit}>
                             <label htmlFor="chat" className="sr-only">Your message</label>
@@ -288,7 +288,7 @@ const ChatDispay:React.FC<ChatDispayProps> = ({user,groupId,socket}) => {
                             </div>
                         </form>
                     </div>
-                )}
+                
                 </>
             )
         }
