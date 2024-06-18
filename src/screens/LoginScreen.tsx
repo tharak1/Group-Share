@@ -22,13 +22,6 @@ const LoginScreen:React.FC = () => {
   })
 
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-        getData();
-    }
-}, []);
-
 
 
   const getData = async () => {
